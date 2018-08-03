@@ -1,0 +1,19 @@
+states:
+    lighter_state:
+        component: colorChange
+        properties:
+            harmony: lighter
+        transitions:
+            check: get_details
+    get_details:
+        component: meya.text_suggestions
+        properties:
+            text: find out more
+            suggestions:
+                - get details
+            transitions:
+                get details: get_details
+    get details:
+        flow: color_details
+    last_question:
+        flow: last_question

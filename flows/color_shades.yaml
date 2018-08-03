@@ -1,0 +1,7 @@
+states:
+    shades_state:
+        component: shades
+    next_state:
+        component: more_shades
+    last:
+        flow: last_question

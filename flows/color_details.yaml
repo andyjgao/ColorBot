@@ -1,0 +1,9 @@
+states:
+    details:
+        component: colorDetails
+    delay_state_rel:
+        component: meya.pass
+        delay:
+            relative: 3
+    end:
+        flow: last_question

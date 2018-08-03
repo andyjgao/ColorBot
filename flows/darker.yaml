@@ -1,0 +1,9 @@
+states:
+    darker_state:
+        component: colorChange
+        properties:
+            harmony: darker
+        transitions:
+            check: last_question
+    last_question:
+        flow: last_question

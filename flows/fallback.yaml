@@ -1,0 +1,9 @@
+triggers:
+  - type: meya.catchall
+states:
+    text_state:
+        component: meya.text
+        properties:
+            text: "I'm sorry but I couldn't find what you are looking for. Please make sure you typed everything correct or contact one of our live agents for support"
+    next:
+        flow: start

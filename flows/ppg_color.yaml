@@ -1,0 +1,25 @@
+states:
+    input_state:
+        component: meya.input_string
+        properties:
+            text: What is the name of the PPG color you are looking for?
+            output: colorName
+            scope: flow
+    found_color:
+        component: ppgColor
+        properties:
+            colorName: '{{flow.colorName}}'
+    delay_state_rel:
+        component: meya.pass
+        delay:
+            relative: 3
+    find_color:
+        component: meya.text_buttons
+        properties:
+            text: Is this the color you were looking for?
+            mode: quick_reply
+            buttons:
+                - text: 'Yes'
+                  flow: last_question
+                - text: 'No'
+                  flow: color_tone

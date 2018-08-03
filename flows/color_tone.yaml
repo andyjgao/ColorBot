@@ -1,0 +1,52 @@
+triggers:
+  - type: meya.keyword
+    properties:
+        ignorecase: true
+        keyword: color_tone
+states:
+    change_state:
+        component: meya.text_buttons
+        properties:
+            text: 'How would you like to change the color?'
+            mode: quick_reply
+            buttons:
+                - text: Lighter
+                  action: lighter
+                - text: Darker
+                  action: darker
+                - text: List Shades
+                  action: shades
+                - text: Start Over
+                  flow: color_tools
+        transitions:
+            lighter: lighter_state
+            darker: darker_state
+            shades: shades_state
+    lighter_state:
+        component: colorChange
+        properties:
+            harmony: lighter
+        transitions:
+            check: check_state
+    darker_state:
+        component: colorChange
+        properties:
+            harmony: darker
+        transitions:
+            check: check_state
+    shades_state:
+        component: shades
+    next_state:
+        component: more_shades
+    check_state:
+        component: meya.text_buttons
+        properties:
+            text: Do you want to change colors again?
+            mode: quick_reply
+            buttons:
+                - text: 'Yes'
+                  action: change
+                - text: 'No'
+                  flow: last_question
+        transitions:
+            change: change_state

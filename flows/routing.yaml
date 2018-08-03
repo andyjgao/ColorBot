@@ -1,0 +1,38 @@
+triggers:
+  - type: meya.api_ai
+    properties:
+        client_access_token: 6ada44955ec64b508b1fc750562921b6
+route: false
+intents:
+  human_please: live_agent
+  color_recommend: color_recommend
+  shades: color_shades
+  change_my_color: color_tone
+  lighter: lighter
+  darker: darker
+  match: match
+states:
+  start:
+    flow: small_talk
+    return: true
+  live_agent:
+    flow: live_agent
+    return: true
+  color_recommend:
+    flow: color_tools
+    return: true
+  color_shades:
+    flow: color_shades
+    return: true
+  change_my_color:
+    flow: color_tone
+    return: true
+  lighter:
+    flow: lighter
+    return: true
+  darker:
+    flow: darker
+    return: true
+  match:
+    flow: matching_color
+    return: true

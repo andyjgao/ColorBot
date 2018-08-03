@@ -1,0 +1,30 @@
+states:
+    ask_color:
+        component: meya.api_ai
+        properties:
+            text: What kind of color are you looking for?
+            client_access_token: 6ada44955ec64b508b1fc750562921b6
+            language: en
+            error_message: I am unable to find a color like that
+            min_confidence: 0.6
+            require_match: false
+        transitions:
+            found_color: found_color
+    found_color:
+        component: colorRecommend
+        properties:
+            colorName: '{{flow.colorName}}'
+    delay_state_rel:
+        component: meya.pass
+        delay:
+            relative: 2
+    find_color:
+        component: meya.text_buttons
+        properties:
+            text: Is this the color you were looking for?
+            mode: quick_reply
+            buttons:
+                - text: 'Yes'
+                  flow: last_question
+                - text: 'No'
+                  flow: color_tone

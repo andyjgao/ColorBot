@@ -1,0 +1,26 @@
+triggers:
+  - type: meya.keyword
+    properties:
+        ignorecase: true
+        keyword: live_agent
+states:
+    set_state:
+        component: meya.set
+        properties:
+            key: avatar_url
+            value: "{{user.avatar_url}}"
+            scope: user
+    transfer:
+        component: human.transfer
+        properties:
+            text: >
+                One moment while I transfer you to a live agent who be able
+                to better assist you in finding the right paint color
+            assignee: "Inigo Montoya"
+            note: |
+                Customer wants to find a paint color
+                name - {{ user.first_name}} {{user.last_name}}
+                gender - {{user.gender}}
+                locale - {{ user.locale }} {{user.timezone}}
+            timeout: 30
+            timeout_flow: timeout_response

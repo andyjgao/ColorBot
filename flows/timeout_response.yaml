@@ -1,0 +1,28 @@
+states:
+    first:
+        component: meya.text
+        properties:
+            text: Sorry but it seems that our live agents aren't available at this time. Please try again later 😔
+    delay_state_rel:
+        component: meya.pass
+        delay:
+            relative: 2
+    text_buttons_state:
+        component: meya.text_buttons
+        properties:
+            text: Is anything else I can help you with?
+            output: button_click
+            mode: quick_reply
+            buttons:
+                - text: Find me a color
+                  flow: color_tools
+                - text: Match my color
+                  flow: matching_color
+                - text: Nope. That's it.
+                  action: end
+        transitions:
+            end: end
+    end:
+        component: meya.text
+        properties:
+            text: Hope you have a nice day!

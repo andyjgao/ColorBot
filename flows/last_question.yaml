@@ -1,0 +1,29 @@
+triggers:
+  - type: meya.keyword
+    properties:
+        ignorecase: true
+        keyword: last_question
+states:
+    text_buttons_state:
+        component: meya.text_buttons
+        properties:
+            text: Is anything else I can help you with?
+            output: button_click
+            mode: quick_reply
+            buttons:
+                - text: Find me a color
+                  flow: color_tools
+                - text: Match my color
+                  flow: matching_color
+                - text: Change my Color
+                  flow: color_tone
+                - text: Talk to a live agent
+                  flow: live_agent
+                - text: Nope. I'm good!
+                  action: end
+        transitions:
+            end: end
+    end:
+        component: meya.text
+        properties:
+            text: It's my pleasure to help!

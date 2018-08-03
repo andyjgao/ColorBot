@@ -1,0 +1,10 @@
+triggers:
+  - type: meya.keyword
+    properties:
+        ignorecase: true
+        keyword: poopy
+states:
+    text_state:
+        component: meya.text
+        properties:
+            text: "{{user.gender}}"

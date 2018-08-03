@@ -1,0 +1,18 @@
+triggers:
+  - type: meya.open_chat
+states:
+    welcome_state:
+        component: meya.text
+        properties:
+            text: Hi there, Let me know if you any questions regarding our recommended colors. We would love to help.
+    text_buttons_state:
+        component: meya.text_buttons
+        properties:
+            text: Let me know what I can help with?
+            output: button_click
+            mode: quick_reply
+            buttons:
+                - text: Find me a color
+                  flow: color_tools
+                - text: Talk to a live agent
+                  flow: live_agent

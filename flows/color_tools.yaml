@@ -1,0 +1,45 @@
+states:
+    exist_check_state:
+        component: meya.conditional_exists
+        properties:
+            scope: user
+            key: first_name
+        transitions:
+            exists: image
+            notexists: check_2
+    check_2:
+        component: meya.conditional_equal
+        properties:
+            value1: '{{ user.first_name }}'
+            value2: None
+        transitions:
+            equal: image
+            notequal: meya
+    image:
+        component: meya.text_buttons
+        properties:
+            text: How would you like to find color?
+            output: player
+            mode: quick_reply
+            buttons:
+                - text: 'PPG Paint Name'
+                  flow: ppg_color
+                - text: 'Color Name'
+                  flow: color_recommend
+                - text: 'From Image'
+                  flow: input_image
+                - text: I'm feeling lucky
+                  flow: random_color
+    meya:
+        component: meya.text_buttons
+        properties:
+            text: How would you like to find color?
+            output: player
+            mode: quick_reply
+            buttons:
+                - text: 'PPG Paint Name'
+                  flow: ppg_color
+                - text: 'Color Name'
+                  flow: color_recommend
+                - text: I'm feeling lucky
+                  flow: random_color

@@ -1,0 +1,12 @@
+triggers:
+  - type: meya.keyword
+    properties:
+        ignorecase: true
+        keyword: random_color
+states:
+    get_color:
+        component: randomColor
+    color_details:
+        flow: color_details
+        data:
+            colorName: "{{user.color}}"
