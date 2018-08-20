@@ -5,17 +5,44 @@ states:
             scope: user
             key: color
         transitions:
-            exists: first
+            exists: harmony
             notexists: notexists_state
     notexists_state:
         component: meya.text
         properties:
             text: Sorry, but we do not have a color to match with. Type find me a color and select a color
         return: true
+    harmony:
+        component: meya.text_buttons
+        properties:
+            text: How would you like to match?
+            output: button_click
+            scope: flow
+            mode: quick_reply
+            buttons:
+            -   text: Complementary
+                data:
+                    harmony: complementary
+            -   text: Triadic
+                data:
+                    harmony: triadic
+            -   text: Split Complementary
+                data:
+                    harmony: split_complementary
+            -   text: Tetradic
+                data:
+                    harmony: tetradic
+            -   text: Analogous
+                data:
+                    harmony: analogous
     first:
         component: matchingColor
         properties:
-            harmony: split_complementary
+            harmony: '{{ flow.harmony }}'
+    delay_state_rel:
+        component: meya.pass
+        delay:
+            relative: 3
     last_question:
         component: meya.text_buttons
         properties:

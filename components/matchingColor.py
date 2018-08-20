@@ -50,8 +50,8 @@ class ColorChange(Component):
         # Creating reply msg 
         card = Cards(elements=elements)
         message= self.create_message(card=card)
-        text = 'We found that these colors best match with {}: '.format(str(self.db.user.get('color'))       )
+        text = 'We found that these colors match with {}: '.format(str(self.db.user.get('color'))       )
         reply_text = self.create_message(text=text)
         message = [reply_text,message]
         
-        return self.respond(messages=message)
+        return self.respond(messages=message,action="next")

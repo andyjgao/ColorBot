@@ -7,7 +7,7 @@ import random
 
 class ChuckNorrisJoke(Component):
 
-    def start(self
+    def start(self):
         
         # Getting list of colors available in dataset
         response = requests.post('https://get-colors-service-dot-color-monarch-flex.appspot.com', json = {'allColors':'yes'})

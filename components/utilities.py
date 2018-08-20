@@ -21,7 +21,7 @@ def colors():
                  'navy':[0,0,128],'grey':[128,128,128],'white':[255,255,255],
                  'black':[0,0,0],
                  'cloudy blue': [172, 194, 217],
-                 'dark pastel green': [86, 174, 87],
+                 'dark green': [86, 174, 87],
                  'dust': [178, 153, 110],
                  'electric lime': [168, 255, 4],
                  'fresh green': [105, 216, 79],
