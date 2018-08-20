@@ -30,8 +30,8 @@ class ColorRecommend(Component):
             self.db.user.set('color', text)
             buttons = [Button(text='Get Details',flow="color_details",data={'colorName': self.db.user.get('color')})]
             image = Card(title=text, image_url=response['imgURL'], buttons=buttons,   mode="buttons", passthru='false')
-            #creating reply msg
             
+            #creating reply msg
             image_card =  self.create_message(card=image)
             text = 'The best PPG paint that matches with your color is ' + \
             text + '. Here is what the color looks like:'

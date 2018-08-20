@@ -8,14 +8,15 @@ from meya.cards import Cards, Card, Button
 class Shades(Component):
 
     def start(self):
+        
+        # getting selected color details
         color = str(self.db.user.get('color'))
         api_host = host()
         URL = '/colors?name='+color
         response = requests.get(api_host+URL)
         response = response.json()['result']
         
-        
-        
+        # initializing urls of the shade colors of selected color
         elements = []
         
         num_url = api_host + '/colors?color-number=' 
@@ -118,6 +119,7 @@ class Shades(Component):
             
         ]
      
+        # creating reply msg 
         element = Card(title=response['Color Name'],
                           text='Shade 6',
                           image_url=response['imgURL'],

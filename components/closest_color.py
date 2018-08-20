@@ -7,24 +7,29 @@ from utilities import host
 from utilities import get_as_base64
 from meya import Component
 from meya.cards import Image, ImageWithButtons, Button, Card
-class ChuckNorrisJoke(Component):
-    
 
+class closestColor(Component):
     def start(self):
+       
+        # Finding dominant color from uploaded image
         URL = str(self.db.flow.get('color_url'))
         data = {"url": URL}
         response = requests.post(url = "https://ppgpaint-api.herokuapp.com", json = data)
         response = response.json()
+       
+        # Getting info on found dominant color
         closestColor = response['result']['colors'][0]['closestColor'][0]
         URL = '/colors?name=' + closestColor
         api_host = host()
         response = requests.get(api_host+URL)
         response = response.json()['result']
+        
          #Getting color name and image
         text = response['Color Name']
         self.db.user.set('color', text)
         buttons = [Button(text='Get Details',flow="color_details",data={'colorName': self.db.user.get('color')})]
         image = Card(title = text, image_url=response['imgURL'], buttons=buttons,   mode="buttons", passthru='true')
+        
         #creating reply msg
         image_card =  self.create_message(card=image)
         text = 'The best PPG paint that matches with your color is ' + \

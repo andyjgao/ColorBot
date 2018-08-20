@@ -11,16 +11,17 @@ class ColorRecommend(Component):
         # importing from utilities
         api_host = host()
 
-        #getting user color
+        # getting user color
         color = self.properties['colorName'].capitalize()
         url = '/colors?name='+color
         response = requests.get(api_host+url)
         response = response.json()['result']
         
-            #Getting color name and image
+        # getting color name and image
         if response['Color Name']:
             text = response['Color Name']
             self.db.user.set('color', text)
+            
             # Color Details
             name =  str(self.db.user.get('color'))
             number = response['Color Number']
@@ -30,6 +31,8 @@ class ColorRecommend(Component):
             imgURL = response['imgURL']
             ppg_url = more_info(name,number,colName)
             buttons = [Button(text="Go to PPG", url=ppg_url)]
+            
+            # Creating reply msg
             card = Card(
                      image_url=imgURL,
                      title=name,
@@ -45,7 +48,7 @@ class ColorRecommend(Component):
             
             return self.respond(messages=[msg1,msg2,msg3], action="next")
 
-        #color not found
+        # color not found
         else:
             text = 'Unfortunately, I cannot find the color you are looking for.'
             message = self.create_message(text=text)

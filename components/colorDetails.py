@@ -9,6 +9,7 @@ class ColorDetails(Component):
 
     def start(self):
         
+        # From a selected color, get details in json
         color = str(self.db.flow.get('colorName'))
         self.db.user.set('color', color)
         URL = '/colors?name=' + color
@@ -17,7 +18,7 @@ class ColorDetails(Component):
         response = response.json()['result']
         
         
-        # Color Details
+        # Organizing detail info to display Color Number, RGB, Desc, Image
         name = color
         number = response['Color Number']
         r,g,b = str(response['R']),str(response['G']),str(response['B'])
@@ -31,6 +32,8 @@ class ColorDetails(Component):
                  title=name,
                  buttons = buttons
         )
+        
+        # creating reply msg
         the_card = self.create_message(card=card)
         text = 'Description: ' + desc + '\n' + 'RGB: ( ' +r+', '+g+', '+b+ ' )' +'\n' + 'Color Number: ' + number
         reply_text = self.create_message(text=text)

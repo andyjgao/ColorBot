@@ -8,6 +8,7 @@ class ColorChange(Component):
 
     def start(self):
         
+        # Getting color details and selected matching harmony 
         api_host = host()
         harmony = self.properties['harmony']
         color = str(self.db.user.get('color'))       
@@ -17,20 +18,23 @@ class ColorChange(Component):
         color_names = []
         color_img = []
         
+        # Getting color names and color images of matching colors in a list 
         for color in response:
             color_names.append(response[color]['Name'])
             color_img.append(response[color]['imgURL'])
     
         ppg_url = api_host + '/colors?name='
         url_response = []
+        
+        # Getting details of each color
         for name in color_names:
             response =  requests.get(ppg_url + name)
             response = response.json()['result']
             url_response.append(response)
         
-   
         elements = []
-        print url_response
+        
+        # Creating Cards of matching colors
         for i in range(0, len(color_names)):
             buttons = [
                 Button(text="Get Details",flow="color_details",data={'colorName': color_names[i]}),
@@ -40,18 +44,14 @@ class ColorChange(Component):
             element = Card(title=color_names[i],
                           image_url=url_response[i]['imgURL'],
                           buttons=buttons)
-        
             
             elements.append(element)
-           
-        
-        
+
+        # Creating reply msg 
         card = Cards(elements=elements)
         message= self.create_message(card=card)
-        
         text = 'We found that these colors best match with {}: '.format(str(self.db.user.get('color'))       )
         reply_text = self.create_message(text=text)
         message = [reply_text,message]
-        
         
         return self.respond(messages=message)
